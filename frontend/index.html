@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MeetIQ - AI Meeting Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span>Meet</span><strong>IQ</strong>
+        </div>
+
+        <div class="tagline">
+            AI Meeting Intelligence
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-badge">
+                ✨ AI-Powered Meeting Intelligence
+            </div>
+
+            <h1>
+                Turn meetings into
+                <span>actionable intelligence.</span>
+            </h1>
+
+            <p>
+                Upload your meeting audio and let AI extract the
+                transcript, decisions, action items, questions and topics.
+            </p>
+
+        </section>
+
+
+        <!-- ================= UPLOAD ================= -->
+
+        <section class="upload-card">
+
+            <div class="upload-icon">
+                🎤
+            </div>
+
+            <h2>Upload your meeting</h2>
+
+            <p>
+                MP3, WAV, M4A or MP4
+            </p>
+
+            <input
+                type="file"
+                id="audioFile"
+                accept=".mp3,.wav,.m4a,.mp4,audio/*"
+            >
+            <div id="audioPlayerContainer" class="audio-player hidden">
+
+    <div class="audio-player-title">
+        🎧 Meeting Audio
+    </div>
+
+    <audio id="audioPlayer" controls></audio>
+
+</div>
+
+            <button id="analyzeBtn">
+                Analyze Meeting
+            </button>
+
+            <div id="status"></div>
+
+        </section>
+
+
+        <!-- ================= LOADING ================= -->
+
+        <section id="loading" class="loading hidden">
+
+            <div class="loader"></div>
+
+            <h3>Analyzing your meeting...</h3>
+
+            <p>
+                Transcribing audio and extracting meeting intelligence.
+            </p>
+
+        </section>
+
+
+        <!-- ================= RESULTS ================= -->
+
+        <section id="results" class="results hidden">
+
+            <!-- RESULT HEADER -->
+
+            <div class="section-title">
+
+                <div>
+                    <span class="result-label">
+                        AI ANALYSIS
+                    </span>
+
+                    <h2>
+                        Meeting Intelligence
+                    </h2>
+                </div>
+
+                <span id="fileName"></span>
+
+            </div>
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="result-actions">
+
+                <button
+                    id="copySummaryBtn"
+                    class="secondary-btn"
+                    type="button"
+                >
+                    📋 Copy Summary
+                </button>
+
+                <button
+                    id="copyTranscriptBtn"
+                    class="secondary-btn"
+                    type="button"
+                >
+                    📝 Copy Transcript
+                </button>
+
+                <button
+                    id="newMeetingBtn"
+                    class="secondary-btn"
+                    type="button"
+                >
+                    🔄 Analyze Another
+                </button>
+
+            </div>
+
+
+            <!-- ================= STATS ================= -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🎯
+                    </div>
+
+                    <div>
+                        <span class="stat-number" id="decisionCount">
+                            0
+                        </span>
+
+                        <span class="stat-label">
+                            Decisions
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <div>
+                        <span class="stat-number" id="actionCount">
+                            0
+                        </span>
+
+                        <span class="stat-label">
+                            Action Items
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ❓
+                    </div>
+
+                    <div>
+                        <span class="stat-number" id="questionCount">
+                            0
+                        </span>
+
+                        <span class="stat-label">
+                            Questions
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🏷️
+                    </div>
+
+                    <div>
+                        <span class="stat-number" id="topicCount">
+                            0
+                        </span>
+
+                        <span class="stat-label">
+                            Topics
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= SUMMARY ================= -->
+
+            <div class="result-card summary-card">
+
+                <div class="card-heading">
+
+                    <span class="card-icon">
+                        📌
+                    </span>
+
+                    <div>
+                        <h3>Executive Summary</h3>
+
+                        <p class="card-subtitle">
+                            AI-generated overview of the meeting
+                        </p>
+                    </div>
+
+                </div>
+
+                <p id="summary"></p>
+
+            </div>
+
+
+            <!-- ================= DECISIONS ================= -->
+
+            <div class="result-card">
+
+                <div class="card-heading">
+
+                    <span class="card-icon">
+                        🎯
+                    </span>
+
+                    <div>
+                        <h3>Key Decisions</h3>
+
+                        <p class="card-subtitle">
+                            Important decisions identified by AI
+                        </p>
+                    </div>
+
+                </div>
+
+                <ul id="decisions"></ul>
+
+            </div>
+
+
+            <!-- ================= ACTION ITEMS ================= -->
+
+            <div class="result-card">
+
+                <div class="card-heading">
+
+                    <span class="card-icon">
+                        ✅
+                    </span>
+
+                    <div>
+                        <h3>Action Items</h3>
+
+                        <p class="card-subtitle">
+                            Tasks identified from the meeting
+                        </p>
+                    </div>
+
+                </div>
+
+                <div id="actions"></div>
+
+            </div>
+
+
+            <!-- ================= QUESTIONS ================= -->
+
+            <div class="result-card">
+
+                <div class="card-heading">
+
+                    <span class="card-icon">
+                        ❓
+                    </span>
+
+                    <div>
+                        <h3>Open Questions</h3>
+
+                        <p class="card-subtitle">
+                            Questions that still need answers
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <ul id="questions"></ul>
+
+            </div>
+
+
+            <!-- ================= TOPICS ================= -->
+
+            <div class="result-card">
+
+                <div class="card-heading">
+
+                    <span class="card-icon">
+                        🏷️
+                    </span>
+
+                    <div>
+
+                        <h3>Topics</h3>
+
+                        <p class="card-subtitle">
+                            Main subjects discussed
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="topics"
+                    class="topic-container"
+                ></div>
+
+            </div>
+
+
+            <!-- ================= TRANSCRIPT ================= -->
+
+            <div class="result-card transcript-card">
+
+                <div class="card-heading">
+
+                    <span class="card-icon">
+                        📝
+                    </span>
+
+                    <div>
+
+                        <h3>Full Transcript</h3>
+
+                        <p class="card-subtitle">
+                            Complete meeting transcription
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p id="transcript"></p>
+
+            </div>
+
+
+            <!-- ================= BOTTOM ACTION ================= -->
+
+            <div class="bottom-action">
+
+                <button
+                    id="newMeetingBtnBottom"
+                    type="button"
+                >
+                    🔄 Analyze Another Meeting
+                </button>
+                <button id="downloadBtn">📥 Download Report</button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            MeetIQ — AI Meeting Intelligence Platform
+        </p>
+
+        <span>
+            Built with FastAPI + AI
+        </span>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
