@@ -49,19 +49,19 @@ Simply upload a meeting recording and MeetIQ automatically processes the audio, 
 
 ### 🏠 Main Dashboard
 
-![MeetIQ Dashboard](Screenshorts/Meet_1.png)
+![MeetIQ Dashboard](Screenshots/Meet_1.png)
 
 ### 🧠 Meeting Analysis
 
 
 
 ### 📊 Meeting Intelligence
-![MeetIQ Analysis](Screenshorts/meet_2.png)
-![MeetIQ Intelligence](Screenshorts/meet_3.png)
+![MeetIQ Analysis](Screenshots/meet_2.png)
+![MeetIQ Intelligence](Screenshots/meet_3.png)
 
 ### 📝 Transcript & Insights
 
-![MeetIQ Transcript](Screenshorts/meet_4.png)
+![MeetIQ Transcript](Screenshots/meet_4.png)
 ---
 
 ## 🏗️ How MeetIQ Works
@@ -145,8 +145,7 @@ MeetIQ/
 │   ├── meet_3.png
 │   └── meet_4.png
 │
-├── .env
-├── .gitignore
+├── ├── .gitignore
 ├── check_models.py
 └── README.md
 ```
