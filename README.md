@@ -427,7 +427,6 @@ Act faster.
 
 **Shreya Singh**
 
-MCA Student | AI & Software Development
 
 ---
 
